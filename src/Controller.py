@@ -5,8 +5,8 @@ from src.Utilities import clipped_first_order_filter
 from src.State import BehaviorState, State
 
 import numpy as np
-from transforms3d.euler import euler2mat, quat2euler
-from transforms3d.quaternions import qconjugate, quat2axangle
+from transforms3d.euler import euler2mat, quat2euler   # 欧拉角2旋转矩阵，四元数2欧拉角
+from transforms3d.quaternions import qconjugate, quat2axangle # 共轭，轴角（绕单位轴转，几何意义与四元数相同）
 from transforms3d.axangles import axangle2mat
 
 
@@ -86,16 +86,16 @@ class Controller:
                 command,
             )
 
-            # Apply the desired body rotation
+            # Apply the desired body rotation  
+            '''把指令欧拉角转换为矩阵，再乘以当前状态向量'''
             rotated_foot_locations = (
-                euler2mat(
-                    command.roll, command.pitch, 0.0
-                )
+                euler2mat( command.roll, command.pitch, 0.0 )   # 没有yaw动作
                 @ state.foot_locations
             )
 
             # Construct foot rotation matrix to compensate for body tilt
-            (roll, pitch, yaw) = quat2euler(state.quat_orientation)
+            '''把当前四元数转换成欧拉角'''
+            (roll, pitch, yaw) = quat2euler(state.quat_orientation) 
             correction_factor = 0.8
             max_tilt = 0.4
             roll_compensation = correction_factor * np.clip(roll, -max_tilt, max_tilt)
