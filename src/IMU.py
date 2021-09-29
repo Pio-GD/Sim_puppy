@@ -19,6 +19,7 @@ class IMU:
     def flush_buffer(self):
         self.serial_handle.reset_input_buffer()
 
+    # IMU数据解码后得到Pitch和Roll角度值
     def read_orientation(self):
         """Reads quaternion measurements from the Teensy until none are left. Returns the last read quaternion.
         
