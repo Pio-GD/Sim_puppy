@@ -1,8 +1,7 @@
-*.DS_Store
-*.pyc
 **/__pycache__
+imgs
 README.md
 Sim/SimPupper.ttt
-Sim/pupper.ttt
+
 
 
