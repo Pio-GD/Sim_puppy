@@ -9,6 +9,7 @@ class SimPuppy:
         self.__clientID = sim.simxStart(CoppeliaSim_IpAddress,19999,True,True,5000,5) # Connect to CoppeliaSim
         if self.__IsReady():           
             self.__opMode = sim.simx_opmode_blocking
+            # 得到句柄
             self.__FL_Motor1 = sim.simxGetObjectHandle(self.__clientID, "Motor1_FL", self.__opMode)
             self.__FL_Motor2 = sim.simxGetObjectHandle(self.__clientID, "Motor2_FL", self.__opMode)
             self.__FL_Motor3 = sim.simxGetObjectHandle(self.__clientID, "Motor3_FL", self.__opMode)
@@ -65,7 +66,7 @@ Update_Period = 0.01 # 数据更新周期,单位s
 time.sleep(Update_Period)
 
 opMode=sim.simx_opmode_blocking     # 设置操作模式，等待返回值模式
-# 得到句柄
+
 _, FL_Motor1 = sim.simxGetObjectHandle(clientID, "Motor1_FL", opMode)
 _, FL_Motor2 = sim.simxGetObjectHandle(clientID, "Motor2_FL", opMode)
 _, FL_Motor3 = sim.simxGetObjectHandle(clientID, "Motor3_FL", opMode)
