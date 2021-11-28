@@ -73,6 +73,7 @@ class Controller:
         """
 
         ########## Update operating state based on command ######
+        '''状态机管理'''
         if command.activate_event:
             state.behavior_state = self.activate_transition_mapping[state.behavior_state]
         elif command.trot_event:
